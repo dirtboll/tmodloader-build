@@ -14,6 +14,7 @@ ENV LD_LIBRARY_PATH /steamlib
 # Create tModLoader user and drop root permissions
 ARG UID
 ARG GID
+ARG VERSION
 RUN addgroup -g $GID tml \
  && adduser tml -u $UID -G tml -h /home/tml -D
 USER tml
@@ -26,7 +27,7 @@ RUN steamcmd +quit
 
 RUN curl -O https://raw.githubusercontent.com/tModLoader/tModLoader/1.4.4/patches/tModLoader/Terraria/release_extras/DedicatedServerUtils/manage-tModLoaderServer.sh \
  && chmod u+x manage-tModLoaderServer.sh \
- && ./manage-tModLoaderServer.sh install --github --skip-mods \
+ && ./manage-tModLoaderServer.sh install --github --skip-mods ${VERSION:+--tml-version $VERSION} \
  && chmod u+x $HOME/tModLoader/start-tModLoaderServer.sh
 
 EXPOSE 7777
