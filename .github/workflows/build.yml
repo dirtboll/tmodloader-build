@@ -25,12 +25,12 @@ jobs:
           docker build \
            --build-arg UID=${{ env.uid }} \
            --build-arg GID=${{ env.gid }} \
-           --build-arg VERSION=${{ env.version }}
-           -t tmodloader:latest \
+           --build-arg VERSION=${{ env.version }} \
+           -t tmodloader:${{ env.version }} \
            .
       - name: Export
         run: |
-          docker save tmodloader:latest -o tmodloader.tar
+          docker save tmodloader:${{ env.version }} -o tmodloader.tar
       - name: Upload
         uses: appleboy/scp-action@v0.1.4
         with:
