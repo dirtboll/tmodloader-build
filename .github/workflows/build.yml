@@ -6,7 +6,7 @@ on:
 name: Build tModLoader and upload
 
 env:
-  version: v2023.6.25.36
+  version: v2023.06.25.36
   uid: 1001
   gid: 1001
   
