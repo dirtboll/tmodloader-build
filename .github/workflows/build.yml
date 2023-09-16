@@ -9,6 +9,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -19,7 +20,7 @@ jobs:
       - name: Export
         run: |
           docker save tmodloader:latest -o tmodloader.tar
-      - name: copy file via ssh password
+      - name: Upload
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
